@@ -22,6 +22,7 @@
     "@ngrx/effects": "^10.1.2",
     "@ngrx/store": "^10.1.2",
     "@ngrx/store-devtools": "^10.1.2",
+    "fomantic-ui-css": "^2.8.7",
     "ngx-fomantic-ui": "^0.11.7",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

@@ -11,6 +11,7 @@ import * as fromRoot from 'src/app/store';
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
+ 
 })
 export class AppComponent {
   title = 'melangefr';

@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import * as fromAuth from 'src/app/auth/reducers';
@@ -19,6 +20,7 @@ export const COMPONENTS = [
   declarations: COMPONENTS,
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     AuthRoutingModule,
     StoreModule.forFeature(
         fromAuth.authFeatureKey,

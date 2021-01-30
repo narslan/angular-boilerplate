@@ -1,1 +1,27 @@
-<p>login-form works!</p>
+<div class="ui fluid card">
+    <div class="content">
+<div class="ui form error">
+<form [formGroup]="form" (ngSubmit)="submit()">
+  
+        <div class="field">
+            <input type="text" matInput autocomplete="username" placeholder="Username" formControlName="username" />
+
+        </div>
+        <div class="field">
+        <input type="password" matInput placeholder="Password"  autocomplete="current-password" formControlName="password" />
+        </div>
+ 
+    <div  *ngIf="errorMessage" class="ui error message">
+        <div class="header">Login Failed!</div>
+        <p> {{ errorMessage }}</p>
+      </div>
+   
+      <button class="ui primary labeled icon button" type="submit">
+        <i class="unlock alternate icon"></i>
+        Login
+      </button>
+    
+</form>
+</div>
+    </div>
+</div>
