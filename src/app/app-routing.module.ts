@@ -4,7 +4,7 @@ import { AuthGuard } from './auth/services/auth-guard.service';
 import { NotFoundPageComponent } from './core/containers/not-found-page.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/words', pathMatch: 'full' },
+  { path: '', redirectTo: '/books', pathMatch: 'full' },
   {
     path: 'books',
     loadChildren: () =>

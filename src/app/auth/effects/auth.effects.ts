@@ -41,6 +41,8 @@ export class AuthEffects {
       this.actions$.pipe(
         ofType(AuthApiActions.loginRedirect, AuthActions.logout),
         tap((authed) => {
+          console.log(authed);
+          
           this.router.navigate(['/login']);
         })
       ),

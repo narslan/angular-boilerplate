@@ -20,7 +20,10 @@ export const COMPONENTS = [
   imports: [
     CommonModule,
     AuthRoutingModule,
-    StoreModule.forFeature(fromAuth.authFeatureKey, fromAuth.reducers),
+    StoreModule.forFeature(
+        fromAuth.authFeatureKey,
+        fromAuth.reducers
+      ),
     EffectsModule.forFeature([AuthEffects])
   ]
 })
