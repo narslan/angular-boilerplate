@@ -1,0 +1,14 @@
+
+<fui-sidebar-container class="ui bottom attached segment">
+    <fui-sidebar class="inverted vertical" #sidebar>
+        <a class="item">1</a>
+        <a class="item">2</a>
+    </fui-sidebar>
+    <fui-sidebar-sibling [isDimmedWhenVisible]="true">
+        <div class="ui basic segment">
+            <h3 class="ui header">Content</h3>
+            <ng-content></ng-content>
+            <!-- <button class="ui button" (click)="sidebar.open()">Open Sidebar</button> -->
+        </div>
+    </fui-sidebar-sibling>
+</fui-sidebar-container>
