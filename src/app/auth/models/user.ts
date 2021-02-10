@@ -6,3 +6,9 @@ export interface Credentials {
 export interface User {
   name: string;
 }
+
+export interface RegisterForm {
+  username: string;
+  email: string;
+  password: string;
+}

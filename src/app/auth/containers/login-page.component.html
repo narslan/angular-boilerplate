@@ -1,7 +1,7 @@
 <div class="page-login">
     <div class="ui centered grid container">
-        <div class="five wide column">
-            <app-login-form (submitted)="onSubmit($event)" [pending]="pending$ | async" [errorMessage]="error$ | async">
+        <div class="six wide column">
+            <app-login-form (submitEvent)="onSubmit($event)" [pending]="pending$ | async" [errorMessage]="error$ | async">
             </app-login-form>
         </div>
     </div>

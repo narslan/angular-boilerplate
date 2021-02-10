@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { LoginPageActions } from 'src/app/auth/actions';
+import { LoginActions } from 'src/app/auth/actions';
 import { Credentials } from 'src/app/auth/models';
 import * as fromAuth from 'src/app/auth/reducers';
 
@@ -13,11 +13,11 @@ import * as fromAuth from 'src/app/auth/reducers';
 export class LoginPageComponent implements OnInit {
   pending$ = this.store.select(fromAuth.selectLoginPagePending);
   error$ = this.store.select(fromAuth.selectLoginPageError);
-  constructor(private store: Store<fromAuth.State>) { }
+  constructor(private store: Store<fromAuth.State>) {   }
 
   ngOnInit(): void {
   }
   onSubmit(credentials: Credentials) {
-    this.store.dispatch(LoginPageActions.login({ credentials }));
+    this.store.dispatch(LoginActions.login({ credentials }));
   }
 }

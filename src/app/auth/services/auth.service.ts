@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -14,13 +14,13 @@ export class AuthService {
      * Simulate a failed login to display the error
      * message for the login form.
      */
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-      })
-    };
-    const url = `${environment.authUrl}/user/login`
-    return this.http.put<User>(url, {username, password}, httpOptions )
+    // const httpOptions = {
+    //   headers: new HttpHeaders({
+    //     'Content-Type':  'application/json',
+    //   })
+    // };
+    const url = `${environment.authUrl}/login`
+    return this.http.post<User>(url, {username, password})
    
   }
 

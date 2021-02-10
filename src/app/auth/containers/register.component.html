@@ -1,0 +1,8 @@
+<div class="page-login">
+    <div class="ui centered grid container">
+        <div class="six wide column">
+            <app-register-form (submitEvent)="onSubmit($event)" [pending]="pending$ | async" [errorMessage]="error$ | async">
+            </app-register-form>
+        </div>
+    </div>
+</div>

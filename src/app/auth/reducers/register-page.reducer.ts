@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
-import { AuthApiActions, LoginActions } from 'src/app/auth/actions';
+import { AuthApiActions, RegisterActions } from 'src/app/auth/actions';
 
-export const loginPageFeatureKey = 'loginPage';
+export const registerPageFeatureKey = 'registerPage';
 
 export interface State {
   error: string ;
@@ -15,19 +15,19 @@ export const initialState: State = {
 
 export const reducer = createReducer(
   initialState,
-  on(LoginActions.login, (state) => ({
+  on(RegisterActions.register, (state) => ({
     ...state,
     error: '',
     pending: true,
   })),
 
-  on(AuthApiActions.loginSuccess, (state) => ({
+  on(AuthApiActions.registerSuccess, (state) => ({
     ...state,
     error: '',
     pending: false,
   })),
 
-  on(AuthApiActions.loginFailure, (state, { message }) => ({
+  on(AuthApiActions.registerFailure, (state, { message }) => ({
     ...state,
     error: message,
     pending: false,

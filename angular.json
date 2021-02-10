@@ -24,14 +24,18 @@
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "allowedCommonJsDependencies": ["date-fns"],
-            "assets": [
+            "assets": [             
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "*",
+                "input": "node_modules/fomantic-ui-css/themes/default/assets/fonts",
+                "output": "assets/fonts/"
+              }
             ],
             "styles": [
               "src/styles.css",
               "node_modules/fomantic-ui-css/semantic.min.css"
-              
             ],
             "scripts": []
           },
@@ -68,7 +72,9 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "melangefr:build"
+            "browserTarget": "melangefr:build",
+            "sslKey": "keys/melange.com+5-key.pem",
+            "sslCert": "keys/melange.com+5.pem"
           },
           "configurations": {
             "production": {

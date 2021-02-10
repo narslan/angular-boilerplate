@@ -1,14 +1,16 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Credentials } from 'src/app/auth/models';
+import { RegisterForm } from '../../models';
 
 @Component({
-  selector: 'app-login-form',
-  templateUrl: './login-form.component.html',
-  styleUrls: ['./login-form.component.css'],
+  selector: 'app-register-form',
+  templateUrl: './register-form.component.html',
+  styleUrls: ['./register-form.component.css']
 })
-export class LoginFormComponent implements OnInit {
+export class RegisterFormComponent implements OnInit {
+
   submitted = false;
+
   @Input()
   set pending(isPending: boolean | null) {
     if (isPending) {
@@ -20,28 +22,37 @@ export class LoginFormComponent implements OnInit {
 
   @Input() errorMessage!: string | null;
 
-  @Output() submitEvent = new EventEmitter<Credentials>();
+  @Output() submitEvent = new EventEmitter<RegisterForm>();
 
   form: FormGroup = new FormGroup({
     username: new FormControl('',
-      [Validators.required]
+      [Validators.required,
+      Validators.minLength(4),
+      Validators.maxLength(10)
+      ]
     ),
-    password: new FormControl('',
-      [Validators.required]
+    email: new FormControl('',
+      [Validators.required,
+      Validators.email
+      ]
     ),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6),
+    ]),
   });
   constructor() { }
-  // convenience getter for easy access to form fields
-
+   // convenience getter for easy access to form fields
   get f() { return this.form.controls; }
-
   ngOnInit(): void {
   }
 
   onSubmit() {
     this.submitted = true;
+
     if (this.form.valid) {
       this.submitEvent.emit(this.form.value);
     }
   }
+
 }

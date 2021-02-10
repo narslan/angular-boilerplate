@@ -1,10 +1,11 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EMPTY, of } from 'rxjs';
 import { catchError, concatMap, exhaustMap, map, tap } from 'rxjs/operators';
-import { AuthActions, AuthApiActions, LoginPageActions } from 'src/app/auth/actions';
-import { Credentials } from 'src/app/auth/models';
+import { AuthActions, AuthApiActions, LoginActions } from 'src/app/auth/actions';
+import { Credentials, MelangeError } from 'src/app/auth/models';
 import { AuthService } from '../services/auth.service';
 
 
@@ -25,12 +26,16 @@ export class AuthEffects {
 
   login$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(LoginPageActions.login),
+      ofType(LoginActions.login),
       map((action) => action.credentials),
       exhaustMap((auth: Credentials) =>
         this.authService.login(auth).pipe(
           map((user) => AuthApiActions.loginSuccess({ user })),
-          catchError((error) => of(AuthApiActions.loginFailure({ error })))
+          catchError((error: HttpErrorResponse) => {
+            const message = error.error as MelangeError
+
+            return of(AuthApiActions.loginFailure({ message: message.error })); 
+           })
         )
       )
     )

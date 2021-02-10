@@ -8,7 +8,16 @@ export const loginSuccess = createAction(
 
 export const loginFailure = createAction(
   '[Auth/API] Login Failure',
-  props<{ error: any }>()
+  props<{ message: string }>()
+);
+
+export const registerSuccess = createAction(
+  '[Auth/API] Register Success',
+);
+
+export const registerFailure = createAction(
+  '[Auth/API] Register Failure',
+  props<{ message: string }>()
 );
 
 export const loginRedirect = createAction('[Auth/API] Login Redirect');

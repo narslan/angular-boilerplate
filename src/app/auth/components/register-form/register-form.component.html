@@ -9,32 +9,41 @@
                         formControlName="username" />
                         <div *ngIf="submitted && f.username.errors" class="ui error message">
                             <div *ngIf="f.username.errors.required">Username is required</div>
+                            <div *ngIf="f.username.errors.minlength">Username must be at least 4 characters</div>
+                            <div *ngIf="f.username.errors.maxlength">Username must be at most 10 characters</div>
                         </div>
                 </div>
+
+                <div class="field">
+                    <label for="email">Email</label>
+                    <input type="text" autocomplete="email" placeholder="Email"
+                        formControlName="email" />
+                        <div *ngIf="submitted && f.email.errors" class="ui error message">
+                            <div *ngIf="f.email.errors.required">email is required</div>
+                            <div *ngIf="f.email.errors.email">email is not valid</div>
+                        </div>
+                </div>
+
                 <div class="field">
                     <label for="password">Password</label>
                     <input type="password" placeholder="Password" autocomplete="current-password"
                         formControlName="password" />
                         <div *ngIf="submitted && f.password.errors" class="ui error message">
                             <div *ngIf="f.password.errors.required">Password is required</div>
+                            <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
                         </div>
                 </div>
 
                 <div *ngIf="errorMessage" class="ui error message">
-                    <div class="header">Login Failed!</div>
+                    <div class="header">Registiration Failed!</div>
                     <p> {{ errorMessage }}</p>
                 </div>
-                <div class="left floated column">
 
-                <button class="ui primary labeled icon button" type="submit">
-                    <i class="sign in alternate icon"></i>
-                    Login
+                <button class="ui positive labeled icon button" type="submit">
+                    <i class="pencil icon"></i>
+                    Register
                 </button>
-            </div>
-            <div class="right floated column">
 
-              <a [routerLink]="['/register']"> Register</a> 
-            </div>
             </form>
         </div>
     </div>
