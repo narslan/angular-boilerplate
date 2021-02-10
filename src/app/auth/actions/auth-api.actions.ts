@@ -13,6 +13,7 @@ export const loginFailure = createAction(
 
 export const registerSuccess = createAction(
   '[Auth/API] Register Success',
+  props<{ message: string }>()
 );
 
 export const registerFailure = createAction(

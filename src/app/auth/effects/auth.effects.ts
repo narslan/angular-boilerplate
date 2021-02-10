@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EMPTY, of } from 'rxjs';
 import { catchError, concatMap, exhaustMap, map, tap } from 'rxjs/operators';
-import { AuthActions, AuthApiActions, LoginActions } from 'src/app/auth/actions';
-import { Credentials, MelangeError } from 'src/app/auth/models';
+import { AuthActions, AuthApiActions, LoginActions, RegisterActions } from 'src/app/auth/actions';
+import { Credentials, MelangeError, RegisterForm } from 'src/app/auth/models';
 import { AuthService } from '../services/auth.service';
 
 
@@ -40,6 +40,22 @@ export class AuthEffects {
       )
     )
   );
+
+  register$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(RegisterActions.register),
+    map((action) => action.rf),
+    exhaustMap((rf: RegisterForm) =>
+      this.authService.register(rf).pipe(
+        map((message) => AuthApiActions.registerSuccess({ message })),
+        catchError((error: HttpErrorResponse) => {
+          const message = error.error as MelangeError
+          return of(AuthApiActions.registerFailure({ message: message.error })); 
+         })
+      )
+    )
+  )
+);
 
   loginRedirect$ = createEffect(
     () =>
