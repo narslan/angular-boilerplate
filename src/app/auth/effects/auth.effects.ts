@@ -34,28 +34,35 @@ export class AuthEffects {
           catchError((error: HttpErrorResponse) => {
             const message = error.error as MelangeError
 
-            return of(AuthApiActions.loginFailure({ message: message.error })); 
-           })
+            return of(AuthApiActions.loginFailure({ message: message.error }));
+          })
         )
       )
     )
   );
 
   register$ = createEffect(() =>
-  this.actions$.pipe(
-    ofType(RegisterActions.register),
-    map((action) => action.rf),
-    exhaustMap((rf: RegisterForm) =>
-      this.authService.register(rf).pipe(
-        map((message) => AuthApiActions.registerSuccess({ message })),
-        catchError((error: HttpErrorResponse) => {
-          const message = error.error as MelangeError
-          return of(AuthApiActions.registerFailure({ message: message.error })); 
-         })
+    this.actions$.pipe(
+      ofType(RegisterActions.register),
+      map((action) => action.rf),
+      exhaustMap((rf: RegisterForm) =>
+        this.authService.register(rf).pipe(
+          map((message) => {
+            this.router.navigate(['/login']);
+            return AuthApiActions.registerSuccess({ message })}
+            ),
+          catchError((error: HttpErrorResponse) => {
+            if (error.error) {
+              const message = error.error as MelangeError
+              return of(AuthApiActions.registerFailure({ message: message.error }));
+            } else {
+              return of(AuthApiActions.registerFailure({ message: error.message }));
+            }
+          })
+        )
       )
     )
-  )
-);
+  );
 
   loginRedirect$ = createEffect(
     () =>
@@ -63,7 +70,7 @@ export class AuthEffects {
         ofType(AuthApiActions.loginRedirect, AuthActions.logout),
         tap((authed) => {
           console.log(authed);
-          
+
           this.router.navigate(['/login']);
         })
       ),
@@ -74,7 +81,7 @@ export class AuthEffects {
     () =>
       this.actions$.pipe(
         ofType(AuthApiActions.loginSuccess),
-        tap(() => this.router.navigate(['/']))
+        tap(() => this.router.navigate(['/books']))
       ),
     { dispatch: false }
   );

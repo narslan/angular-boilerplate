@@ -53,3 +53,17 @@ export const selectLoginPagePending = createSelector(
   selectLoginPageState,
   fromLoginPage.getPending
 );
+
+export const selectRegisterPageState = createSelector(
+  selectAuthState,
+  (state) => state.registerPage
+);
+
+export const selectRegisterPageError = createSelector(
+  selectRegisterPageState,
+  fromRegisterPage.getError
+);
+export const selectRegisterPagePending = createSelector(
+  selectRegisterPageState,
+  fromRegisterPage.getPending
+);

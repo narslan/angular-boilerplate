@@ -12,8 +12,8 @@ import { RegisterForm } from '../models';
 })
 export class RegisterComponent implements OnInit {
 
-  pending$ = this.store.select(fromAuth.selectLoginPagePending);
-  error$ = this.store.select(fromAuth.selectLoginPageError);
+  pending$ = this.store.select(fromAuth.selectRegisterPagePending);
+  error$ = this.store.select(fromAuth.selectRegisterPageError);
 
   constructor(private store: Store<fromAuth.State>) { }
 
