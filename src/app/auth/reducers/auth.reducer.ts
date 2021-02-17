@@ -18,4 +18,4 @@ export const reducer = createReducer(
   on(AuthActions.logout, () => initialState)
 );
 
-export const getUser = (state: State) => state.user;
+export const getUser = (state: State) => { return state.user};

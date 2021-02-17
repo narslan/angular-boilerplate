@@ -33,7 +33,6 @@ export class AuthEffects {
           map((user) => AuthApiActions.loginSuccess({ user })),
           catchError((error: HttpErrorResponse) => {
             const message = error.error as MelangeError
-
             return of(AuthApiActions.loginFailure({ message: message.error }));
           })
         )
